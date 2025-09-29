@@ -22,7 +22,7 @@
         }
         header {
             text-align: center;
-            background: #1a237e; /* Deep indigo for header */
+            background: #1a237e; /* Deep indigo */
             padding: 30px 15px;
             border-radius: 15px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.1);
@@ -45,7 +45,7 @@
         }
         @keyframes highlight {
             from { color: #ffffff; }
-            to { color: #e1bee7; } /* Light purple for animation */
+            to { color: #e1bee7; } /* Light purple */
         }
         .disclaimer {
             background: #f3e5f5; /* Light pinkish-purple */
@@ -65,13 +65,24 @@
             padding: 15px;
         }
         .section-header {
-            background: linear-gradient(135deg, #ec407a 0%, #3f51b5 100%); /* Pink to indigo gradient */
+            background: linear-gradient(135deg, #ec407a 0%, #3f51b5 100%); /* Pink to indigo */
             color: white;
             padding: 15px;
             font-size: 1.3em;
             font-weight: 600;
             border-radius: 8px;
             text-align: center;
+        }
+        .total-seats {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #4a148c;
+            background: #f3e5f5;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-style: italic;
         }
         .whats-new {
             display: flex;
@@ -80,7 +91,7 @@
             margin-top: 10px;
         }
         .notice {
-            background: #e1bee7; /* Light purple */
+            background: #e1bee7;
             border: 1px solid #ab47bc;
             border-radius: 8px;
             padding: 8px;
@@ -93,20 +104,19 @@
         .notice a:hover {
             text-decoration: underline;
         }
-        .program-list {
+        .dropdown-view {
             margin: 20px 0;
         }
-        .program-item {
-            background: #f3e5f5;
-            border: 1px solid #ce93d8;
-            border-radius: 8px;
+        select.program-dropdown {
+            width: 100%;
+            max-width: 400px;
             padding: 10px;
-            margin: 5px 0;
+            font-size: 0.9em;
+            border-radius: 8px;
+            border: 1px solid #ce93d8;
+            background: #f3e5f5;
+            color: #4a148c;
             cursor: pointer;
-            transition: background 0.3s;
-        }
-        .program-item:hover {
-            background: #e1bee7;
         }
         .program-details {
             display: none;
@@ -156,7 +166,7 @@
             color: white;
         }
         tr:nth-child(even) {
-            background: #f3e5f5; /* Light pinkish-purple for alternate rows */
+            background: #f3e5f5; /* Light pinkish-purple */
         }
         .admission-status {
             margin: 20px 0;
@@ -236,7 +246,7 @@
             border-radius: 20px;
             font-size: 0.85em;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            opacity: 0.8; /* Slightly transparent */
+            opacity: 0.8;
         }
         footer {
             text-align: center;
@@ -257,11 +267,17 @@
             .section-header {
                 font-size: 1.1em;
             }
+            .total-seats {
+                font-size: 1em;
+            }
             .detail-item, .notice, th, td {
                 font-size: 0.8em;
             }
-            .toggle-btn {
+            .toggle-btn, .print-btn {
                 padding: 6px 12px;
+                font-size: 0.8em;
+            }
+            select.program-dropdown {
                 font-size: 0.8em;
             }
         }
@@ -284,6 +300,7 @@
 
         <section>
             <div class="section-header">PG Admissions 2025-26</div>
+            <div class="total-seats">Total 127 seats over 22 MD/MS programmes</div>
             <div class="admission-status">
                 <p>Admissions for the 2025-26 academic session are yet to commence.</p>
             </div>
@@ -295,208 +312,214 @@
             <div class="sub-section-header" onclick="toggleSubSection(this)">Programme Details (Seats, Fee Details)</div>
             <div class="sub-content">
                 <div class="toggle-buttons">
-                    <button class="toggle-btn" onclick="showListView()">List View</button>
+                    <button class="toggle-btn" onclick="showDropdownView()">Dropdown View</button>
                     <button class="toggle-btn" onclick="showTableView()">Table View</button>
                 </div>
-                <div class="program-list" id="list-view" style="display: block;">
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Anatomy)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 3</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 1</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹0 (No Tuition Fee)</div>
+                <div class="dropdown-view" id="dropdown-view" style="display: block;">
+                    <select class="program-dropdown" onchange="showProgramDetails(this)">
+                        <option value="" disabled selected>Select a Programme</option>
+                        <option value="anatomy">MD (Anatomy)</option>
+                        <option value="physiology">MD (Physiology)</option>
+                        <option value="biochemistry">MD (Biochemistry)</option>
+                        <option value="microbiology">MD (Microbiology)</option>
+                        <option value="pharmacology">MD (Pharmacology)</option>
+                        <option value="community-medicine">MD (Community Medicine)</option>
+                        <option value="pathology">MD (Pathology)</option>
+                        <option value="general-medicine">MD (General Medicine)</option>
+                        <option value="respiratory-medicine">MD (Respiratory Medicine)</option>
+                        <option value="dermatology">MD (Dermatology, Venereology & Leprosy)</option>
+                        <option value="psychiatry">MD (Psychiatry)</option>
+                        <option value="paediatrics">MD (Paediatrics)</option>
+                        <option value="anaesthesiology">MD (Anaesthesiology)</option>
+                        <option value="radio-diagnosis">MD (Radio-diagnosis)</option>
+                        <option value="radiation-oncology">MD (Radiation Oncology)</option>
+                        <option value="emergency-medicine">MD (Emergency Medicine)</option>
+                        <option value="immuno-hematology">MD (Immuno Hematology & Blood Transfusion)</option>
+                        <option value="general-surgery">MS (General Surgery)</option>
+                        <option value="obstetrics-gynaecology">MS (Obstetrics & Gynaecology)</option>
+                        <option value="ophthalmology">MS (Ophthalmology)</option>
+                        <option value="orthopaedics">MS (Orthopaedics)</option>
+                        <option value="otorhinolaryngology">MS (Otorhinolaryngology)</option>
+                    </select>
+                    <div id="program-details">
+                        <div class="program-details" id="anatomy">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 3</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 1</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹0 (No Tuition Fee)</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Physiology)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 4</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹0 (No Tuition Fee)</div>
+                        <div class="program-details" id="physiology">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 4</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹0 (No Tuition Fee)</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Biochemistry)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 3</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 1</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹0 (No Tuition Fee)</div>
+                        <div class="program-details" id="biochemistry">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 3</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 1</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹0 (No Tuition Fee)</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Microbiology)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 3</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 1</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹0 (No Tuition Fee)</div>
+                        <div class="program-details" id="microbiology">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 3</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 1</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹0 (No Tuition Fee)</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Pharmacology)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 3</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 1</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹0 (No Tuition Fee)</div>
+                        <div class="program-details" id="pharmacology">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 3</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 1</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹0 (No Tuition Fee)</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Community Medicine)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 3</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 1</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹0 (No Tuition Fee)</div>
+                        <div class="program-details" id="community-medicine">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 3</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 1</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹0 (No Tuition Fee)</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Pathology)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 8</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 4</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 4</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹12,50,000</div>
+                        <div class="program-details" id="pathology">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 8</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 4</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 4</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹12,50,000</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (General Medicine)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 15</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 8</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 7</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹26,00,000</div>
+                        <div class="program-details" id="general-medicine">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 15</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 8</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 7</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹26,00,000</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Respiratory Medicine)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 4</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹25,00,000</div>
+                        <div class="program-details" id="respiratory-medicine">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 4</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹25,00,000</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Dermatology, Venereology & Leprosy)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 3</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 1</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹26,00,000</div>
+                        <div class="program-details" id="dermatology">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 3</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 1</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹26,00,000</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Psychiatry)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 3</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 1</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹26,00,000</div>
+                        <div class="program-details" id="psychiatry">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 3</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 1</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹26,00,000</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Paediatrics)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 13</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 7</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 6</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹26,00,000</div>
+                        <div class="program-details" id="paediatrics">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 13</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 7</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 6</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹26,00,000</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Anaesthesiology)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 12</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 6</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 6</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹17,00,000</div>
+                        <div class="program-details" id="anaesthesiology">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 12</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 6</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 6</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹17,00,000</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Radio-diagnosis)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
+                        <div class="program-details" id="radio-diagnosis">
+                            <div class="details-grid">
                             <div class="detail-item"><strong>Total Seats:</strong> 6</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 3</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 3</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹30,00,000</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 3</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 3</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹30,00,000</div>
+                            </div>
+                        </div>
+                        <div class="program-details" id="radiation-oncology">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 3</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 1</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹17,00,000</div>
+                            </div>
+                        </div>
+                        <div class="program-details" id="emergency-medicine">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 2</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 1</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 1</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹17,00,000</div>
+                            </div>
+                        </div>
+                        <div class="program-details" id="immuno-hematology">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 3</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 1</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹15,00,000</div>
+                            </div>
+                        </div>
+                        <div class="program-details" id="general-surgery">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 15</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 8</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 7</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹25,00,000</div>
+                            </div>
+                        </div>
+                        <div class="program-details" id="obstetrics-gynaecology">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 6</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 3</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 3</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹30,00,000</div>
+                            </div>
+                        </div>
+                        <div class="program-details" id="ophthalmology">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 5</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 3</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹26,00,000</div>
+                            </div>
+                        </div>
+                        <div class="program-details" id="orthopaedics">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 6</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 3</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 3</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹30,00,000</div>
+                            </div>
+                        </div>
+                        <div class="program-details" id="otorhinolaryngology">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 4</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹17,00,000</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Radiation Oncology)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 3</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 1</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹17,00,000</div>
-                        </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Emergency Medicine)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 2</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 1</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 1</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹17,00,000</div>
-                        </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MD (Immuno Hematology & Blood Transfusion)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 3</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 1</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹15,00,000</div>
-                        </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MS (General Surgery)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 15</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 8</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 7</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹25,00,000</div>
-                        </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MS (Obstetrics & Gynaecology)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 6</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 3</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 3</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹30,00,000</div>
-                        </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MS (Ophthalmology)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 5</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 3</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹26,00,000</div>
-                        </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MS (Orthopaedics)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 6</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 3</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 3</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹30,00,000</div>
-                        </div>
-                    </div>
-                    <div class="program-item" onclick="toggleDetails(this)">MS (Otorhinolaryngology)</div>
-                    <div class="program-details">
-                        <div class="details-grid">
-                            <div class="detail-item"><strong>Total Seats:</strong> 4</div>
-                            <div class="detail-item"><strong>All India Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>State Quota:</strong> 2</div>
-                            <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹17,00,000</div>
-                        </div>
-                    </div>
+                    <button class="print-btn" onclick="downloadPDF()">Download PDF</button>
                 </div>
                 <div class="table-view" id="table-view" style="display: none;">
                     <table id="program-table">
@@ -627,7 +650,6 @@
 
             <div class="sub-section-header" onclick="toggleSubSection(this)">FAQ</div>
             <div class="sub-content">
-                <!-- FAQ content goes here -->
                 <p>Frequently Asked Questions about PG Medical Programmes Admissions.</p>
                 <!-- Add more FAQ items as needed -->
             </div>
@@ -641,22 +663,24 @@
     </div>
 
     <script>
-        function toggleDetails(item) {
-            const details = item.nextElementSibling;
+        function showProgramDetails(select) {
+            const programId = select.value;
             const allDetails = document.querySelectorAll('.program-details');
             allDetails.forEach(detail => {
-                if (detail !== details) detail.classList.remove('active');
+                detail.classList.remove('active');
+                if (detail.id === programId) {
+                    detail.classList.add('active');
+                }
             });
-            details.classList.toggle('active');
         }
 
-        function showListView() {
-            document.getElementById('list-view').style.display = 'block';
+        function showDropdownView() {
+            document.getElementById('dropdown-view').style.display = 'block';
             document.getElementById('table-view').style.display = 'none';
         }
 
         function showTableView() {
-            document.getElementById('list-view').style.display = 'none';
+            document.getElementById('dropdown-view').style.display = 'none';
             document.getElementById('table-view').style.display = 'block';
         }
 
@@ -673,7 +697,6 @@
                 format: 'a4'
             });
 
-            // Prepare data for PDF
             const tableData = [
                 ['MD (Anatomy)', '3', 'Rs. 0 (No Tuition Fee)'],
                 ['MD (Physiology)', '4', 'Rs. 0 (No Tuition Fee)'],
@@ -705,20 +728,21 @@
                 theme: 'striped',
                 styles: { cellPadding: 2, fontSize: 8, overflow: 'linebreak' },
                 columnStyles: {
-                    0: { cellWidth: 90 }, // Programme
-                    1: { cellWidth: 30 }, // Total Seats
-                    2: { cellWidth: 60 }  // Tuition Fee
+                    0: { cellWidth: 90 },
+                    1: { cellWidth: 30 },
+                    2: { cellWidth: 60 }
                 },
                 margin: { top: 20, left: 10, right: 10 },
                 didParseCell: function(data) {
                     if (data.section === 'body' && data.row.index % 2 === 0) {
-                        data.cell.styles.fillColor = [243, 229, 245]; // Light pinkish-purple
+                        data.cell.styles.fillColor = [243, 229, 245];
                     }
                 },
                 didDrawPage: function(data) {
-                    // Add page header
                     doc.setFontSize(12);
                     doc.text('Himalayan Institute of Medical Sciences - PG Programmes 2025-26', 10, 10);
+                    doc.setFontSize(10);
+                    doc.text('Total 127 seats over 22 MD/MS programmes', 10, 15);
                 }
             });
 
@@ -726,5 +750,4 @@
         }
     </script>
 </body>
-
 </html>
