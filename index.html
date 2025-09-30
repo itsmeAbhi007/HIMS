@@ -23,22 +23,22 @@
         header {
             text-align: center;
             background: #1a237e;
-            padding: 30px 15px;
-            border-radius: 15px;
+            padding: 20px 10px;
+            border-radius: 10px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         .college-name {
-            font-size: 2em;
+            font-size: 1.8em;
             color: white;
             margin: 0;
             font-weight: 700;
         }
         .sub-heading {
-            font-size: 0.9em;
+            font-size: 0.85em;
             color: #ffffff;
             font-weight: bold;
-            margin-top: 10px;
+            margin-top: 8px;
             text-transform: uppercase;
             letter-spacing: 1px;
             animation: highlight 2s ease-in-out infinite alternate;
@@ -51,37 +51,37 @@
             background: #f3e5f5;
             border: 1px solid #ce93d8;
             border-radius: 8px;
-            padding: 10px;
-            margin: 20px 0;
+            padding: 8px;
+            margin: 15px 0;
             text-align: center;
-            font-size: 0.9em;
+            font-size: 0.85em;
             color: #4a148c;
         }
         section {
             background: white;
             margin-bottom: 20px;
-            border-radius: 15px;
+            border-radius: 10px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.1);
             padding: 15px;
         }
         .section-header {
             background: linear-gradient(135deg, #ec407a 0%, #3f51b5 100%);
             color: white;
-            padding: 15px;
-            font-size: 1.5em;
+            padding: 12px;
+            font-size: 1.3em;
             font-weight: 700;
             border-radius: 8px;
             text-align: center;
         }
         .sub-section-header {
             background: #e1bee7;
-            padding: 15px;
+            padding: 12px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
             color: #4a148c;
             transition: background 0.3s;
-            margin-top: 20px;
+            margin-top: 15px;
         }
         .sub-section-header:hover {
             background: #ce93d8;
@@ -95,29 +95,29 @@
         }
         .total-seats {
             text-align: center;
-            font-size: 1.2em;
+            font-size: 1.1em;
             font-weight: 600;
             color: #4a148c;
             background: #f3e5f5;
-            padding: 10px;
+            padding: 8px;
             border-radius: 8px;
-            margin: 15px 0;
+            margin: 10px 0;
             font-style: italic;
         }
         .live-seats-status {
-            margin: 20px 0;
-            padding: 15px;
+            margin: 15px 0;
+            padding: 12px;
             background: #f3e5f5;
             border-radius: 8px;
             text-align: center;
         }
         .dropdown-view {
-            margin: 20px 0;
+            margin: 15px 0;
         }
         select.program-dropdown {
             width: 100%;
             max-width: 400px;
-            padding: 10px;
+            padding: 8px;
             font-size: 0.9em;
             border-radius: 8px;
             border: 1px solid #ce93d8;
@@ -137,8 +137,8 @@
         }
         .details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 8px;
         }
         .detail-item {
             background: white;
@@ -149,7 +149,7 @@
             font-size: 0.85em;
         }
         .table-view {
-            margin: 20px 0;
+            margin: 15px 0;
             overflow-x: auto;
         }
         table {
@@ -159,25 +159,34 @@
         }
         caption {
             font-weight: bold;
-            margin-bottom: 10px;
-            font-size: 1em;
+            margin-bottom: 8px;
+            font-size: 0.9em;
             color: #4a148c;
         }
-        th, td {
+        .table-view th, .table-view td {
             border: 1px solid #ce93d8;
-            padding: 10px;
+            padding: 8px;
             text-align: center;
         }
-        th {
+        .table-view th {
             background: #ec407a;
             color: white;
         }
-        tr:nth-child(even) {
+        .table-view tr:nth-child(even) {
             background: #f3e5f5;
+        }
+        .table-view th:nth-child(1), .table-view td:nth-child(1) {
+            width: 60%;
+        }
+        .table-view th:nth-child(2), .table-view td:nth-child(2) {
+            width: 15%;
+        }
+        .table-view th:nth-child(3), .table-view td:nth-child(3) {
+            width: 25%;
         }
         .toggle-buttons {
             text-align: center;
-            margin: 15px 0;
+            margin: 10px 0;
         }
         .toggle-btn {
             background: #ec407a;
@@ -186,7 +195,7 @@
             padding: 8px 15px;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 0.9em;
+            font-size: 0.85em;
             margin: 0 5px;
             transition: background 0.3s;
         }
@@ -200,10 +209,9 @@
             padding: 8px 15px;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 0.9em;
-            margin: 10px 0;
+            font-size: 0.85em;
+            margin: 10px auto;
             display: block;
-            margin: 0 auto;
             transition: background 0.3s;
         }
         .print-btn:hover {
@@ -213,20 +221,20 @@
             text-align: center;
             background: #1a237e;
             color: white;
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 15px;
-            font-size: 0.9em;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 10px;
+            font-size: 0.85em;
         }
         .floating-message {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             background: #1a237e;
             color: white;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 0.85em;
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             opacity: 0.8;
         }
@@ -239,26 +247,26 @@
         }
         @media (max-width: 600px) {
             .college-name {
-                font-size: 1.5em;
+                font-size: 1.4em;
             }
             .sub-heading {
-                font-size: 0.8em;
+                font-size: 0.75em;
             }
             .section-header {
-                font-size: 1.3em;
+                font-size: 1.1em;
             }
             .total-seats {
-                font-size: 1em;
+                font-size: 0.9em;
             }
-            .detail-item, th, td {
-                font-size: 0.8em;
+            .detail-item, .table-view th, .table-view td {
+                font-size: 0.75em;
             }
             .toggle-btn, .print-btn {
                 padding: 6px 12px;
-                font-size: 0.8em;
+                font-size: 0.75em;
             }
             select.program-dropdown {
-                font-size: 0.8em;
+                font-size: 0.75em;
             }
         }
     </style>
@@ -434,7 +442,15 @@
                                 <div class="detail-item"><strong>Total Seats:</strong> 2</div>
                                 <div class="detail-item"><strong>All India Quota:</strong> 1</div>
                                 <div class="detail-item"><strong>State Quota:</strong> 1</div>
-                         <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹15,00,000</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹15,00,000</div>
+                            </div>
+                        </div>
+                        <div class="program-details" id="immuno-hematology">
+                            <div class="details-grid">
+                                <div class="detail-item"><strong>Total Seats:</strong> 3</div>
+                                <div class="detail-item"><strong>All India Quota:</strong> 2</div>
+                                <div class="detail-item"><strong>State Quota:</strong> 1</div>
+                                <div class="detail-item"><strong>Tuition Fee/Year:</strong> ₹15,00,000</div>
                             </div>
                         </div>
                         <div class="program-details" id="general-surgery">
@@ -569,7 +585,7 @@
                             <tr>
                                 <td>MD (Emergency Medicine)</td>
                                 <td>2</td>
-                                <td>₹17,00,000</td>
+                                <td>₹15,00,000</td>
                             </tr>
                             <tr>
                                 <td>MD (Immuno Hematology & Blood Transfusion)</td>
@@ -607,6 +623,11 @@
                 </div>
             </div>
 
+            <div class="sub-section-header" onclick="toggleSubSection(this)">Previous Admission Trends</div>
+            <div class="sub-content">
+                <p>[Placeholder for previous admission trends data]</p>
+            </div>
+
             <div class="sub-section-header" onclick="toggleSubSection(this)">FAQ</div>
             <div class="sub-content">
                 <p>Frequently Asked Questions about PG Medical Programmes Admissions.</p>
@@ -621,7 +642,7 @@
             <div class="sub-content">
                 <p><em>Admissions for the 2025-26 academic session are yet to commence.</em></p>
                 <div class="live-seats-status">
-                    <p>[Embedded code for live seat status will appear here]</p>
+                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTqriqmmLkXPAR_KXNo5sYVVoVCCCC0hsl1gBC0Ayk8oR4tjF4c0wHlWXf34etAmwcCVuXSArG3V1gY/pubhtml?gid=52171566&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="400" frameborder="0" style="border-radius: 8px; border: 1px solid #ce93d8;"></iframe>
                 </div>
             </div>
         </section>
@@ -684,7 +705,7 @@
                 ['MD (Anaesthesiology)', '12', 'Rs. 17,00,000'],
                 ['MD (Radio-diagnosis)', '6', 'Rs. 30,00,000'],
                 ['MD (Radiation Oncology)', '3', 'Rs. 17,00,000'],
-                ['MD (Emergency Medicine)', '2', 'Rs. 17,00,000'],
+                ['MD (Emergency Medicine)', '2', 'Rs. 15,00,000'],
                 ['MD (Immuno Hematology & Blood Transfusion)', '3', 'Rs. 15,00,000'],
                 ['MS (General Surgery)', '15', 'Rs. 25,00,000'],
                 ['MS (Obstetrics & Gynaecology)', '6', 'Rs. 30,00,000'],
@@ -697,11 +718,11 @@
                 head: [['Programme', 'Total Seats', 'Tuition Fee/Year']],
                 body: tableData,
                 theme: 'striped',
-                styles: { cellPadding: 2, fontSize: 8, overflow: 'linebreak' },
+                styles: { cellPadding: 1.5, fontSize: 8, overflow: 'linebreak' },
                 columnStyles: {
-                    0: { cellWidth: 90 },
-                    1: { cellWidth: 30 },
-                    2: { cellWidth: 60 }
+                    0: { cellWidth: 60 },
+                    1: { cellWidth: 20 },
+                    2: { cellWidth: 40 }
                 },
                 margin: { top: 20, left: 10, right: 10 },
                 didParseCell: function(data) {
