@@ -17,45 +17,68 @@
         }
         .container {
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 15px;
+            margin: 10px auto 0; /* Reduced margin-top for tighter spacing */
+            padding: 15px 30px; /* Adjusted for vertical borders */
+        }
+        .vertical-border {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            background: #1a237e;
+            color: #ffffff;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 10px 5px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            z-index: 1000;
+        }
+        .vertical-border.left {
+            left: 0;
+        }
+        .vertical-border.right {
+            right: 0;
+            transform: rotate(180deg);
         }
         header {
             text-align: center;
             background: #1a237e;
-            padding: 20px 10px;
+            padding: 10px 8px;
             border-radius: 10px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            margin-bottom: 15px; /* Tightened spacing */
         }
         .college-name {
             font-size: 1.8em;
             color: white;
             margin: 0;
             font-weight: 700;
+            animation: highlight 2s ease-in-out infinite alternate;
         }
         .sub-heading {
             font-size: 0.85em;
             color: #ffffff;
             font-weight: bold;
-            margin-top: 8px;
+            margin-top: 2px;
             text-transform: uppercase;
             letter-spacing: 1px;
             animation: highlight 2s ease-in-out infinite alternate;
         }
+        .unofficial-note {
+            font-size: 0.75em;
+            color: #4a148c;
+            font-weight: bold;
+            margin-top: 3px;
+            background: #e1bee7;
+            padding: 4px 8px;
+            border-radius: 5px;
+            text-transform: initial;
+        }
         @keyframes highlight {
             from { color: #ffffff; }
             to { color: #e1bee7; }
-        }
-        .disclaimer {
-            background: #f3e5f5;
-            border: 1px solid #ce93d8;
-            border-radius: 8px;
-            padding: 8px;
-            margin: 15px 0;
-            text-align: center;
-            font-size: 0.85em;
-            color: #4a148c;
         }
         section {
             background: white;
@@ -82,6 +105,14 @@
             color: #4a148c;
             transition: background 0.3s;
             margin-top: 15px;
+            position: relative;
+        }
+        .sub-section-header:not(.trends-data .sub-section-header)::before {
+            content: '\25B7'; /* Hollow right arrow */
+            color: #4a148c;
+            font-size: 0.9em;
+            margin-right: 8px;
+            vertical-align: middle;
         }
         .sub-section-header:hover {
             background: #ce93d8;
@@ -89,9 +120,17 @@
         .sub-content {
             display: none;
             padding: 15px;
+            background: #f3e5f5;
+            border-radius: 8px;
+            margin-top: 5px;
         }
         .sub-content.active {
             display: block;
+        }
+        .sub-content p {
+            margin: 0 0 10px 0;
+            color: #4a148c;
+            font-size: 0.9em;
         }
         .total-seats {
             text-align: center;
@@ -105,11 +144,60 @@
             font-style: italic;
         }
         .live-seats-status, .trends-data {
-            margin: 15px 0;
-            padding: 12px;
+            margin: 10px 0;
+            padding: 8px;
             background: #f3e5f5;
             border-radius: 8px;
             text-align: center;
+            max-width: 800px;
+        }
+        .iframe-container {
+            margin-bottom: 15px;
+        }
+        .trends-data iframe {
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+            border: 1px solid #ce93d8;
+        }
+        .trends-data h3 {
+            font-size: 1em;
+            color: #4a148c;
+            margin: 5px 0;
+        }
+        .close-btn {
+            background: #ec407a;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8em;
+            margin-top: 8px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            transition: background 0.3s;
+        }
+        .close-btn:hover {
+            background: #d81b60;
+        }
+        .toggle-all {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .toggle-all-btn {
+            background: #ec407a;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: background 0.3s;
+        }
+        .toggle-all-btn:hover {
+            background: #d81b60;
         }
         .dropdown-view {
             margin: 15px 0;
@@ -202,13 +290,6 @@
         .live-seats-table tr:nth-child(even) {
             background: #f3e5f5;
         }
-        .live-seats-table td:nth-child(1) {
-            text-align: right;
-        }
-        .toggle-buttons {
-            text-align: center;
-            margin: 10px 0;
-        }
         .toggle-btn {
             background: #ec407a;
             color: white;
@@ -267,37 +348,62 @@
             text-decoration: underline;
         }
         @media (max-width: 600px) {
+            .vertical-border {
+                font-size: 1em;
+                padding: 8px 4px;
+            }
+            .container {
+                padding: 15px 20px;
+            }
             .college-name {
                 font-size: 1.4em;
             }
             .sub-heading {
                 font-size: 0.75em;
             }
+            .unofficial-note {
+                font-size: 0.65em;
+                padding: 3px 6px;
+            }
             .section-header {
                 font-size: 1.1em;
+            }
+            .sub-section-header:not(.trends-data .sub-section-header)::before {
+                font-size: 0.8em;
             }
             .total-seats {
                 font-size: 0.9em;
             }
+            .trends-data iframe {
+                height: 250px;
+            }
+            .iframe-container {
+                margin-bottom: 10px;
+            }
             .detail-item, .table-view th, .table-view td, .live-seats-table th, .live-seats-table td {
                 font-size: 0.75em;
             }
-            .toggle-btn, .print-btn {
+            .toggle-btn, .toggle-all-btn, .print-btn, .close-btn {
                 padding: 6px 12px;
                 font-size: 0.75em;
             }
             select.program-dropdown {
                 font-size: 0.75em;
             }
+            .sub-content p {
+                font-size: 0.8em;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="vertical-border left">S R H U</div>
+    <div class="vertical-border right">S R H U</div>
     <div class="container">
         <header>
             <h1 class="college-name">Himalayan Institute of Medical Sciences</h1>
-            <p class="sub-heading">A Constituent Academic Unit of Swami Rama Himalayan University</p>
-            <p class="disclaimer">Note: This is an unofficial resource webpage curated for informational purposes.</p>
+            <p class="sub-heading">(A Constituent Academic Unit of Swami Rama Himalayan University)</p>
+            <p class="unofficial-note">Note: This is an unofficial resource webpage curated for informational purposes.</p>
         </header>
 
         <section>
@@ -647,18 +753,58 @@
             <div class="sub-section-header" onclick="toggleSubSection(this)">Previous Admission Trends</div>
             <div class="sub-content">
                 <div class="trends-data">
-                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTqriqmmLkXPAR_KXNo5sYVVoVCCCC0hsl1gBC0Ayk8oR4tjF4c0wHlWXf34etAmwcCVuXSArG3V1gY/pubhtml?gid=1819456063&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="400" frameborder="0" style="border-radius: 8px; border: 1px solid #ce93d8;"></iframe>
+                    <div class="sub-section-header" onclick="toggleSubSection(this)">AIQ Data (Lowest AIR)</div>
+                    <div class="sub-content">
+                        <div class="iframe-container">
+                            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTqriqmmLkXPAR_KXNo5sYVVoVCCCC0hsl1gBC0Ayk8oR4tjF4c0wHlWXf34etAmwcCVuXSArG3V1gY/pubhtml?gid=886101487&single=true" width="100%" height="300" frameborder="0" scrolling="no"></iframe>
+                            <button class="close-btn" onclick="closeContent(this)">Close Table</button>
+                        </div>
+                    </div>
+                    <div class="sub-section-header" onclick="toggleSubSection(this)">SQ Data (Category-wise, Lowest AIR)</div>
+                    <div class="sub-content">
+                        <div class="iframe-container">
+                            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTqriqmmLkXPAR_KXNo5sYVVoVCCCC0hsl1gBC0Ayk8oR4tjF4c0wHlWXf34etAmwcCVuXSArG3V1gY/pubhtml?gid=981387160&single=true" width="100%" height="300" frameborder="0" scrolling="no"></iframe>
+                            <button class="close-btn" onclick="closeContent(this)">Close Table</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="sub-section-header" onclick="toggleSubSection(this)">FAQ</div>
             <div class="sub-content">
-                <p>Frequently Asked Questions about PG Medical Programmes Admissions.</p>
-            </div>
-
-            <div class="sub-section-header" onclick="toggleSubSection(this)">HNBUMU Link</div>
-            <div class="sub-content">
-                <p><a href="https://meta-secure.com/HNBUMU_MDMS" target="_blank">HNB Uttarakhand Medical Education University (HNBUMU)</a></p>
+                <div class="toggle-all">
+                    <button class="toggle-all-btn" onclick="toggleAllFAQs()">Expand All FAQs</button>
+                </div>
+                <div class="sub-section-header" onclick="toggleSubSection(this)">How do I register for NEET PG 2025 counseling for HIMS?</div>
+                <div class="sub-content">
+                    <p>Register on the HNBUMU portal (<a href="http://www.hnbumu.ac.in/" target="_blank">www.hnbumu.ac.in</a>) when the counseling schedule is announced. Enter NEET PG details, pay the fee, and check eligibility.</p>
+                    <button class="close-btn" onclick="closeContent(this)">Close Answer</button>
+                </div>
+                <div class="sub-section-header" onclick="toggleSubSection(this)">How does choice filling work in HNBUMU counseling?</div>
+                <div class="sub-content">
+                    <p>Log in to the HNBUMU portal, select courses (MD/MS) and colleges (e.g., HIMS), and choose All India Quota or State Quota (if eligible). Lock choices before the deadline.</p>
+                    <button class="close-btn" onclick="closeContent(this)">Close Answer</button>
+                </div>
+                <div class="sub-section-header" onclick="toggleSubSection(this)">What happens after seat allotment at HIMS?</div>
+                <div class="sub-content">
+                    <p>Pay the Advance Tuition Fee on the HNBUMU portal to get an allotment letter and Advance Tuition Fee receipt. Report to HIMS with documents within the given period.</p>
+                    <button class="close-btn" onclick="closeContent(this)">Close Answer</button>
+                </div>
+                <div class="sub-section-header" onclick="toggleSubSection(this)">What documents are needed for HIMS admission?</div>
+                <div class="sub-content">
+                    <p>Bring HNBUMU allotment letter, advance tuition fee receipt, NEET PG 2025 Admit Card, NEET PG 2025 Scorecard, Internship Completion Certificate, MBBS degree, MBBS All Professionals Marksheets, medical registration, recent character certificate, migration certificate, one set photocopy of all original documents, Aadhaar card, PAN card, and category/domicile certificate (if applicable).</p>
+                    <button class="close-btn" onclick="closeContent(this)">Close Answer</button>
+                </div>
+                <div class="sub-section-header" onclick="toggleSubSection(this)">Where can I find updates on NEET PG 2025 counseling for HIMS?</div>
+                <div class="sub-content">
+                    <p>Visit <a href="http://www.hnbumu.ac.in/" target="_blank">www.hnbumu.ac.in</a> for NEET PG 2025 counseling schedules and updates.</p>
+                    <button class="close-btn" onclick="closeContent(this)">Close Answer</button>
+                </div>
+                <div class="sub-section-header" onclick="toggleSubSection(this)">Is hostel accommodation available for PG students at HIMS?</div>
+                <div class="sub-content">
+                    <p>Hostel accommodation is available. It is not mandatory to stay in the hostel, but students living off-campus should reside nearby to ensure clinical duties and responsibilities are not affected.</p>
+                    <button class="close-btn" onclick="closeContent(this)">Close Answer</button>
+                </div>
             </div>
 
             <div class="sub-section-header" onclick="toggleSubSection(this)">Admission Data (live updates)</div>
@@ -668,28 +814,11 @@
                     <table class="live-seats-table">
                         <thead>
                             <tr>
-                                <th>Programme</th>
+                                <th>Course</th>
                                 <th>Vacant Seats</th>
-                                <th>Round</th>
+                                <th>Remarks</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>MD (Anatomy)</td>
-                                <td>2</td>
-                                <td>Round 1</td>
-                            </tr>
-                            <tr>
-                                <td>MD (General Medicine)</td>
-                                <td>5</td>
-                                <td>Round 1</td>
-                            </tr>
-                            <tr>
-                                <td>MS (Orthopaedics)</td>
-                                <td>3</td>
-                                <td>Round 1</td>
-                            </tr>
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -706,6 +835,35 @@
         function toggleSubSection(header) {
             const content = header.nextElementSibling;
             content.classList.toggle('active');
+            updateToggleAllButton();
+        }
+
+        function closeContent(button) {
+            button.closest('.sub-content').classList.remove('active');
+            updateToggleAllButton();
+        }
+
+        function toggleAllFAQs() {
+            const faqContents = document.querySelectorAll('.sub-content .sub-content');
+            const button = document.querySelector('.toggle-all-btn');
+            const anyOpen = Array.from(faqContents).some(content => content.classList.contains('active'));
+
+            faqContents.forEach(content => {
+                if (anyOpen) {
+                    content.classList.remove('active');
+                } else {
+                    content.classList.add('active');
+                }
+            });
+
+            button.textContent = anyOpen ? 'Expand All FAQs' : 'Collapse All FAQs';
+        }
+
+        function updateToggleAllButton() {
+            const faqContents = document.querySelectorAll('.sub-content .sub-content');
+            const button = document.querySelector('.toggle-all-btn');
+            const anyOpen = Array.from(faqContents).some(content => content.classList.contains('active'));
+            button.textContent = anyOpen ? 'Collapse All FAQs' : 'Expand All FAQs';
         }
 
         function showProgramDetails(select) {
@@ -738,28 +896,28 @@
             });
 
             const tableData = [
-                ['MD (Anatomy)', '3', 'Rs. 0 (No Tuition Fee)'],
-                ['MD (Physiology)', '4', 'Rs. 0 (No Tuition Fee)'],
-                ['MD (Biochemistry)', '3', 'Rs. 0 (No Tuition Fee)'],
-                ['MD (Microbiology)', '3', 'Rs. 0 (No Tuition Fee)'],
-                ['MD (Pharmacology)', '3', 'Rs. 0 (No Tuition Fee)'],
-                ['MD (Community Medicine)', '3', 'Rs. 0 (No Tuition Fee)'],
-                ['MD (Pathology)', '8', 'Rs. 12,50,000'],
-                ['MD (General Medicine)', '15', 'Rs. 26,00,000'],
-                ['MD (Respiratory Medicine)', '4', 'Rs. 25,00,000'],
-                ['MD (Dermatology, Venereology & Leprosy)', '3', 'Rs. 26,00,000'],
-                ['MD (Psychiatry)', '3', 'Rs. 26,00,000'],
-                ['MD (Paediatrics)', '13', 'Rs. 26,00,000'],
-                ['MD (Anaesthesiology)', '12', 'Rs. 17,00,000'],
-                ['MD (Radio-diagnosis)', '6', 'Rs. 30,00,000'],
-                ['MD (Radiation Oncology)', '3', 'Rs. 17,00,000'],
-                ['MD (Emergency Medicine)', '2', 'Rs. 15,00,000'],
-                ['MD (Immuno Hematology & Blood Transfusion)', '3', 'Rs. 15,00,000'],
-                ['MS (General Surgery)', '15', 'Rs. 25,00,000'],
-                ['MS (Obstetrics & Gynaecology)', '6', 'Rs. 30,00,000'],
-                ['MS (Ophthalmology)', '5', 'Rs. 26,00,000'],
-                ['MS (Orthopaedics)', '6', 'Rs. 30,00,000'],
-                ['MS (Otorhinolaryngology)', '4', 'Rs. 17,00,000']
+                ['MD (Anatomy)', '3', '₹0 (No Tuition Fee)'],
+                ['MD (Physiology)', '4', '₹0 (No Tuition Fee)'],
+                ['MD (Biochemistry)', '3', '₹0 (No Tuition Fee)'],
+                ['MD (Microbiology)', '3', '₹0 (No Tuition Fee)'],
+                ['MD (Pharmacology)', '3', '₹0 (No Tuition Fee)'],
+                ['MD (Community Medicine)', '3', '₹0 (No Tuition Fee)'],
+                ['MD (Pathology)', '8', '₹12,50,000'],
+                ['MD (General Medicine)', '15', '₹26,00,000'],
+                ['MD (Respiratory Medicine)', '4', '₹25,00,000'],
+                ['MD (Dermatology, Venereology & Leprosy)', '3', '₹26,00,000'],
+                ['MD (Psychiatry)', '3', '₹26,00,000'],
+                ['MD (Paediatrics)', '13', '₹26,00,000'],
+                ['MD (Anaesthesiology)', '12', '₹17,00,000'],
+                ['MD (Radio-diagnosis)', '6', '₹30,00,000'],
+                ['MD (Radiation Oncology)', '3', '₹17,00,000'],
+                ['MD (Emergency Medicine)', '2', '₹15,00,000'],
+                ['MD (Immuno Hematology & Blood Transfusion)', '3', '₹15,00,000'],
+                ['MS (General Surgery)', '15', '₹25,00,000'],
+                ['MS (Obstetrics & Gynaecology)', '6', '₹30,00,000'],
+                ['MS (Ophthalmology)', '5', '₹26,00,000'],
+                ['MS (Orthopaedics)', '6', '₹30,00,000'],
+                ['MS (Otorhinolaryngology)', '4', '₹17,00,000']
             ];
 
             doc.autoTable({
@@ -791,4 +949,3 @@
     </script>
 </body>
 </html>
-
